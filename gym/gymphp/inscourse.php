@@ -1,0 +1,49 @@
+<?php
+$servername = "localhost";
+$username = "root";
+$password = "";
+$db = "gym";
+
+$ccid = $_POST["cid"];
+$ddid = $_POST["did"];
+$amt = $_POST["camt"];
+$wname = $_POST["wtype"];
+$ctime=$_POST["cdur"];
+$id=$_POST["tid"];
+
+$conn = new mysqli($servername, $username, $password,$db);
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+} 
+$sql = "insert into course values('$ccid','$ddid','$amt','$wname','$ctime','$id')";
+$result = mysqli_query($conn,$sql) or die( "could not execute");
+$sql1="select * from course";
+if($result1 = mysqli_query($conn,$sql1))
+{
+$rowcount=mysqli_num_rows($result1);
+}
+?>
+<html>
+    
+<head>
+    <style type="text/css">
+html, 
+body {
+height: 100%;
+}
+
+body {
+background-image: url(g.jpg);
+}
+
+        h2{font-size: 50;}
+    </style>
+    </head>
+    <body >
+        <h1><center><font color="white">MUSCLE IMPRESSION</font></center></h1>
+<h2><center><font color="white"><font size="5">BE FIT. STAY FIT.</font></center></h2><br>
+      <font color="white">  <h1><marquee>Record Added Successfully</marquee></h1><>
+		
+<a href="trainerfun.php" class="previous">&laquo; Back to Menu</a>
+
+        </body></head></html>

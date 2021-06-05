@@ -1,0 +1,107 @@
+
+<html>
+    
+    <header>
+    <img src="g.jpg"></header>
+    <style>
+        img{
+            width: 100%;
+            height: 250px;
+        }
+         table, th, td {
+    border: 0.5px solid white;
+             text-align: center;
+             color: azure;
+             font-family: monospace;
+             font-size: 18;
+            
+             }
+        h3{
+            color: azure;
+            font-size: 40;
+            font-family: monospace;
+        }
+        .right{
+            background-color: white;
+            opacity: 0.7;
+            width: 20%;
+            height: 60%;
+            color: black;
+            font-family: monospace;
+           float: right;
+            font-size: 30;
+            margin-top: -400px;
+            margin-right: 50px;
+            border-radius: 10px;
+        }
+        
+    </style>
+	<h1><center><font color="white">MUSCLE IMPRESSION</font></center></h1>
+<h2><center><font color="white"><font size="5">BE FIT. STAY FIT.</font></center></h2><br>
+   
+    <body bgcolor='black'>  
+<center>	
+<?php
+
+$servername = "localhost";
+$username = "root";
+$password = "";
+$db = "gym";
+$conn = new mysqli($servername, $username, $password,$db);
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+    echo "<table border='1'>
+<h3>MEMBER LIST</h3>
+
+  <tr>
+    <th>NAME OF THE MEMBER</th>
+    <th>MEMBER ID</th> 
+    <th>GENDER</th>
+	<th>DOB</th>
+	<th>DIETID</th>
+	<th>ADDRESS</th>
+  <th>COURSEID</th>
+  </tr>";
+
+  
+	//$sql = "select member.name as n,member.mtid,diet.dtype,course.cid,course.wtype,trainer.name from member,course,diet , trainer where course.cid=member.courseid and diet.did=member.dietid and trainer.tid=course.ttid";
+  
+  $sql = "call viewmem()";
+if($result1 = mysqli_query($conn,$sql))
+{
+    if(mysqli_num_rows($result1)>0)
+    {
+         
+        while($row = mysqli_fetch_assoc($result1))
+        {	
+    
+        
+  
+ echo "<tr>";
+ echo "<td>".$row['name']."</td>";
+    echo"<td>".$row['mtid']."</td>"; 
+  echo"<td>".$row['gender']."</td>";
+  echo"<td>".$row['dob']."</td>";
+  echo"<td>".$row['dietid']."</td>";
+  echo"<td>".$row['address']."</td>";
+echo"<td>".$row['courseid']."</td>";
+
+  echo"</tr>";
+
+        }
+    }
+}
+    echo"</table>";
+                           
+    ?>
+	</center>
+	
+	
+<button><a href="trainerfun.php" class="previous">&laquo; Back to Menu</a></button>
+
+    </body>
+</html>
+
+   

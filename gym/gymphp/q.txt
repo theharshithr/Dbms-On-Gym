@@ -1,0 +1,3 @@
+select student.name,student.stid,exam.etype,course.cid,course.dtype,teacher.name from student,course,exam , teacher where course.cid=student.courseid and exam.eid=student.examid and teacher.tid=course.ttid
+
+$sql = "select s.name,s.stid,e.etype,c.cid,c.dtype,t.name from student as s,course as c,exam as e, teacher as t where c.cid=s.courseid and e.eid=s.examid and t.tid=c.ttid";
